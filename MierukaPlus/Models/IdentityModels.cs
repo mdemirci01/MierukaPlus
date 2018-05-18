@@ -23,8 +23,11 @@ namespace MierukaPlus.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, MierukaPlus.Migrations.Configuration>());
         }
-
+        public DbSet<MierukaPlus.Models.Unit> Units { get; set; }
+        public DbSet<MierukaPlus.Models.Process> Processes { get; set; }
+        public DbSet<MierukaPlus.Models.Machine> Machines { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
